@@ -4,6 +4,7 @@ $skus = ["COD-001", "COD-002", "COD-003","COD-004","COD-005"];
 $produtos = ["Placa Mãe Asus", "Processador Intel i7","Memória RAM 16GB","SSD NVMe 1TB","Fonte Corsair 600W"];
 $precos = [850,1950.90,320.50,450,380];
 $quantidades = [15,0,32,8,0];
+$patrimonioTotal = 0;
 
 // Vetor secundário para as categorias da loja
 $categorias = ["Hardware","Periféricos","Monitores","Cabos","Redes de Computadores"];
@@ -68,7 +69,18 @@ $categorias = ["Hardware","Periféricos","Monitores","Cabos","Redes de Computado
     <?php
     }
 ?>
+<?php
+    for ($s = 0; $s < 5; $s++ ){
+        $patrimonioTotal = $patrimonioTotal + ($quantidades[$s]*$precos[$s]);
+    }
+?>
 </tbody>
+<tfoot>
+    <tr>
+        <td colspan="5">
+            <h3 font-weight:bold class="text-info mb-4">Valor Total do Patrimônio em Estoque: R$ <?php echo number_format($patrimonioTotal,2,',','.')?> </h3>
+</td>
+</tfoot>
 </table>
 <div class="row mt-5">
     <div class="col-md-4">
