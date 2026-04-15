@@ -22,8 +22,12 @@ $categorias = ["Hardware","Periféricos","Monitores","Cabos","Redes de Computado
     th {
         text-align: center;
     }
-   
+   .linha-departamento{
+    display:flex;
+    justify-content:space-between;
+   }
 </style>
+
 </head>
 <body class="bg-dark text-white p-5">
     <div class="container mt-5">
@@ -50,7 +54,13 @@ $categorias = ["Hardware","Periféricos","Monitores","Cabos","Redes de Computado
         <td><strong><?php echo $skus[$i];?></strong></td>
         <td> <?php echo $produtos[$i]; ?></td>
         <td>R$ <?php echo number_format($precos[$i], 2,',','.'); ?></td>
-        <td><?php echo $quantidades[$i]; ?> un.</td>
+        <td><?php if ($quantidades[$i] == 0){ ?>
+        <span class="badge bg-danger">FALTA NO ESTOQUE</span> <?php
+        } elseif($quantidades[$i] < 10){ ?>
+        <span class="text-warning fw-bold"> <?php echo $quantidades[$i]; ?> un. (Baixo) </span> <?php
+        } else { ?>
+        <span class="text-success fw-bold"> <?php echo $quantidades[$i]; ?> un. </span> <?php } ?>
+        </td>
         <td>
             <button class="btn btn-sm btn-warning">Editar</button>
         </td>
@@ -60,5 +70,25 @@ $categorias = ["Hardware","Periféricos","Monitores","Cabos","Redes de Computado
 ?>
 </tbody>
 </table>
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                Departamentos da loja
+            </div>
+        <ul class="list-group list-group-flush">
+            <?php
+// Lê o vetor inteiro. A cada volta, guarda o item na variável $departamento
+        foreach ($categorias as $departamento) {
+        ?>
+        <li class="list group-item d-flex justify-content-betweenalign-items-center linha-departamento">
+            <?php echo "$departamento  "; ?>
+            <span class="badge bg-primary rounded-pill">Ver</span></li>
+        <?php
+        } // Fim do foreach
+        ?>
+        </ul>
+    </div>
+    </div>
 </div>
 
